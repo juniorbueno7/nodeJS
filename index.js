@@ -1,9 +1,22 @@
-import chalk from 'chalk';
+import fs from 'fs';
+import chalk from "chalk";
 
-console.log(chalk.red('hello world'))
+function retornaErro(erro){
+  console.log(erro);
+  throw new Error(chalk.red(erro.code, `nenhum arquivo .md encontrado`));
+}
+//(5) lançando e instanciando um novo erro
 
-// console.log('São geralmente recuperados a partir de um objeto [FileList](https://developer.mozilla.org/pt-BR/docs/Web/API/FileList) que é retornado como resultado da seleção, pelo usuário, de arquivos através do elemento [<input>](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/Input), a partir do objeto [DataTransfer](https://developer.mozilla.org/pt-BR/docs/Web/API/DataTransfer) utilizado em operações de arrastar e soltar, ou a partir da API');
-
-// console.log('São geralmente recuperados a partir de um objeto [FileList](https://developer.mozilla.org/pt-BR/docs/Web/API/FileList) que é retornado como resultado da seleção, pelo usuário, de arquivos através do elemento [<input>](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/Input), a partir do objeto [DataTransfer](https://developer.mozilla.org/pt-BR/docs/Web/API/DataTransfer) utilizado em operações de arrastar e soltar, ou a partir da API');
-
-// console.log('São geralmente recuperados a partir de um objeto [FileList](https://developer.mozilla.org/pt-BR/docs/Web/API/FileList) que é retornado como resultado da seleção, pelo usuário, de arquivos através do elemento [<input>](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/Input), a partir do objeto [DataTransfer](https://developer.mozilla.org/pt-BR/docs/Web/API/DataTransfer) utilizado em operações de arrastar e soltar, ou a partir da API');
+//função para a utilização da lib fs
+//fs.readFile(argumentos necessários para o funcionamento, disponivel na documentação da lib)
+function pegaArquivo(caminhoArquivo){
+  const enconding = 'utf-8';
+  fs.readFile(caminhoArquivo, enconding, (erro, texto) => {
+    if(erro){
+      retornaErro(erro)
+    } 
+    console.log(chalk.green(texto))
+  })
+}
+//(8/43) _ como argumento para nao deixar em branco, no momento nao precisamos preencher essa vaga.
+pegaArquivo('./arquivos/');
